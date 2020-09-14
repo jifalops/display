@@ -110,7 +110,7 @@ class _DisplayExampleState extends State<DisplayExample> {
   DisplayArea widgetArea;
 
   void _update() => widgetArea = DisplayArea(
-      gutters: 32,
+      // gutters: 32,
       height: widget.constraints.maxHeight,
       width: widget.constraints.maxWidth);
 
@@ -174,6 +174,24 @@ class _DisplayExampleState extends State<DisplayExample> {
               Text('Column Width: ${widgetArea.columnWidth.round()}'),
               Text('Two-Column Width: ${widgetArea.twoColumnWidth.round()}'),
               Text('Four-Column Width: ${widgetArea.fourColumnWidth.round()}'),
+            ],
+          ),
+        ),
+        Container(
+          color: Colors.deepOrange[100],
+          child: Row(
+            children: [
+              Expanded(
+                child: SizeResponsive(
+                  builder: (context, area) {
+                    print(area.width);
+                    return Text(
+                      'Heading',
+                      style: TextStyle(fontSize: area.gutters * 1.5),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),

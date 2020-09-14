@@ -15,6 +15,7 @@ class WrapResponsive extends StatelessWidget {
     this.columnsPerChild,
     this.areaBuilder,
     this.direction = Axis.horizontal,
+    this.splitVerticalSpacing = true,
   }) : super(key: key);
 
   final DisplayAreaBuilder areaBuilder;
@@ -25,6 +26,10 @@ class WrapResponsive extends StatelessWidget {
   final List<Widget> children;
   final Axis direction;
 
+  /// If true, half the [DisplayArea.gutters] will be used to pad the top and
+  /// bottom of the internal [Wrap].
+  final bool splitVerticalSpacing;
+
   @override
   Widget build(BuildContext context) {
     return SizeResponsive(
@@ -34,7 +39,7 @@ class WrapResponsive extends StatelessWidget {
         return Container(
           padding: EdgeInsets.symmetric(
             horizontal: area.gutters,
-            vertical: area.gutters,
+            vertical: splitVerticalSpacing ? area.gutters / 2 : area.gutters,
           ),
           child: Wrap(
             direction: direction,

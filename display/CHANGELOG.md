@@ -1,3 +1,8 @@
+## 0.2.1
+
+- Add example
+- Make pub happy.
+
 ## 0.2.0
 
 - Add `fourColumnWidth` getter

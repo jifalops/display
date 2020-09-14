@@ -1,6 +1,6 @@
 name: display
 description: Material metrics for an area of the screen.
-version: 0.2.0
+version: 0.2.1
 homepage: https://github.com/jifalops/display/tree/master/display
 
 environment:

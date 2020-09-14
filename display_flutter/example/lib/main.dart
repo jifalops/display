@@ -142,8 +142,11 @@ class _DisplayExampleState extends State<DisplayExample> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                  'Columns: ${mediaArea.columns}, Margins/Gutters: ${mediaArea.marginsAndGutters}'),
+              Text('Columns: ${widgetArea.columns}'),
+              Text('Margins: ${widgetArea.margins}'),
+              Text('Gutters: ${widgetArea.gutters}'),
+              Text('Column Width: ${widgetArea.columnWidth.round()}'),
+              Text('Two-Column Width: ${widgetArea.doubleColumnWidth.round()}'),
               Text('Pixel ratio: ${media.devicePixelRatio}'),
               Text('Text scale factor: ${media.textScaleFactor}'),
               Text('Orientation: ${media.orientation}'),
@@ -158,9 +161,132 @@ class _DisplayExampleState extends State<DisplayExample> {
         ListTile(
           title: Text(
               'Widget (${_size(widget.constraints.biggest)}): ${widgetArea.type}'),
-          subtitle: Text(
-              'Columns: ${widgetArea.columns}, Margins/Gutters: ${widgetArea.marginsAndGutters}'),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Columns: ${widgetArea.columns}'),
+              Text('Margins: ${widgetArea.margins}'),
+              Text('Gutters: ${widgetArea.gutters}'),
+              Text('Column Width: ${widgetArea.columnWidth.round()}'),
+              Text('Two-Column Width: ${widgetArea.doubleColumnWidth.round()}'),
+            ],
+          ),
         ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: widgetArea.gutters),
+          child: Wrap(
+            spacing: widgetArea.margins,
+            runSpacing: widgetArea.margins,
+            children: [
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+              Container(
+                color: Colors.green,
+                height: 50,
+                width: widgetArea.doubleColumnWidth,
+              ),
+            ],
+          ),
+        )
       ],
     );
   }

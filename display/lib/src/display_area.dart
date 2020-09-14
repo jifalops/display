@@ -37,7 +37,16 @@ class DisplayArea {
   double get columnWidth => (contentWidth - totalMargins) / columns;
 
   /// The width of two material columns including the margin between them.
-  double get doubleColumnWidth => multiColumnWidth(2);
+  ///
+  /// There will be room for two to six of these horizontally depending
+  /// on screen size.
+  double get twoColumnWidth => multiColumnWidth(2);
+
+  /// The width of four material columns including the margins between them.
+  ///
+  /// There will be room for one to three of these horizontally depending
+  /// on screen size.
+  double get fourColumnWidth => multiColumnWidth(4);
 
   double multiColumnWidth(int cols) {
     assert(columns >= 0 && cols <= columns);

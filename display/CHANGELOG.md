@@ -1,3 +1,8 @@
+## 0.2.0
+
+- Add `fourColumnWidth` getter
+- Rename `doubleColumnWidth` to `twoColumnWidth`.
+
 ## 0.1.2
 
 - Add `multiColumnWidth()`

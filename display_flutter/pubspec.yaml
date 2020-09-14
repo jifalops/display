@@ -1,7 +1,7 @@
 name: display_flutter
 description: Flutter add-ons for the `display` package, which defines material metrics for an area of the screen.
 version: 0.1.0
-homepage: https://github.com/jifalops/display/display_flutter
+homepage: https://github.com/jifalops/display/tree/master/display_flutter
 
 environment:
   sdk: ">=2.8.0 <3.0.0"

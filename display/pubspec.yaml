@@ -1,6 +1,6 @@
 name: display
-description: Material metrics for an area of the screen.
-version: 0.2.1
+description: Material metrics for an area of the screen. Determine device type, column width, etc.
+version: 0.2.1+1
 homepage: https://github.com/jifalops/display/tree/master/display
 
 environment:

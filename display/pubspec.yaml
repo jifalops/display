@@ -1,7 +1,7 @@
 name: display
 description: Material metrics for an area of the screen.
 version: 0.2.0
-homepage: https://github.com/jifalops/display/display
+homepage: https://github.com/jifalops/display/tree/master/display
 
 environment:
   sdk: ">=2.8.0 <3.0.0"

@@ -1,4 +1,7 @@
+import 'package:display/display.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/basic.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
 void main() {
   runApp(MyApp());
@@ -77,41 +80,88 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
+      body: LayoutBuilder(
+          builder: (context, constraints) => ListView(
+                children: [
+                  DisplayExample(constraints),
+                  TextField(),
+                ],
+              )),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class DisplayExample extends StatefulWidget {
+  const DisplayExample(this.constraints);
+  final BoxConstraints constraints;
+  @override
+  _DisplayExampleState createState() => _DisplayExampleState();
+}
+
+class _DisplayExampleState extends State<DisplayExample> {
+  MediaQueryData media;
+  DisplayArea mediaArea;
+  DisplayArea widgetArea;
+
+  void _update() => widgetArea = DisplayArea(
+      height: widget.constraints.maxHeight, width: widget.constraints.maxWidth);
+
+  String _size(Size s) => '${s.width.round()}x${s.height.round()}';
+
+  @override
+  void initState() {
+    _update();
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    media = MediaQuery.of(context);
+    mediaArea = DisplayArea(height: media.size.height, width: media.size.width);
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(DisplayExample oldWidget) {
+    if (oldWidget.constraints != widget.constraints) _update();
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          title: Text('Media (${_size(media.size)}): ${mediaArea.type}'),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                  'Columns: ${mediaArea.columns}, Margins/Gutters: ${mediaArea.marginsAndGutters}'),
+              Text('Pixel ratio: ${media.devicePixelRatio}'),
+              Text('Text scale factor: ${media.textScaleFactor}'),
+              Text('Orientation: ${media.orientation}'),
+              Text('Platform brightness: ${media.platformBrightness}'),
+              Text('Padding: ${media.padding}'),
+              Text('Gesture insets: ${media.systemGestureInsets}'),
+              Text('View insets: ${media.viewInsets}'),
+              Text('View padding: ${media.viewPadding}'),
+            ],
+          ),
+        ),
+        ListTile(
+          title: Text(
+              'Widget (${_size(widget.constraints.biggest)}): ${widgetArea.type}'),
+          subtitle: Text(
+              'Columns: ${widgetArea.columns}, Margins/Gutters: ${widgetArea.marginsAndGutters}'),
+        ),
+      ],
     );
   }
 }

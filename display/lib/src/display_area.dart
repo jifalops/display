@@ -7,14 +7,37 @@ import 'types.dart';
 /// [Material breakpoints](https://material.io/design/layout/responsive-layout-grid.html#breakpoints)
 /// for screen type, columns, and default margins/gutters.
 class DisplayArea {
-  const DisplayArea({@required this.height, @required this.width});
+  const DisplayArea({
+    @required this.height,
+    @required this.width,
+    double margins,
+    double gutters,
+  })  : _margins = margins,
+        _gutters = gutters;
 
   final double height;
   final double width;
+  final double _margins;
+  final double _gutters;
+
+  double get margins => _margins ?? defaultMarginsAndGutters;
+  double get gutters => _gutters ?? defaultMarginsAndGutters;
 
   double get aspectRatio => width / height;
   bool get isLandscape => width > height;
   bool get isPortrait => !isLandscape;
+
+  /// [width] minus gutters.
+  double get contentWidth => width - gutters * 2;
+
+  /// The sum of all the margins between columns.
+  double get totalMargins => margins * (columns - 1);
+
+  /// The width of one material column.
+  double get columnWidth => (contentWidth - totalMargins) / columns;
+
+  /// The width of two material columns including the margin between them.
+  double get doubleColumnWidth => 2 * columnWidth + margins;
 
   MaterialDisplayType get specificType {
     if (isPortrait) {
@@ -81,7 +104,7 @@ class DisplayArea {
       return 12;
   }
 
-  double get marginsAndGutters {
+  double get defaultMarginsAndGutters {
     if (width < 720)
       return 16.0;
     else
@@ -89,8 +112,17 @@ class DisplayArea {
   }
 
   @override
-  operator ==(o) => o is DisplayArea && height == o.height && width == o.width;
+  operator ==(o) =>
+      o is DisplayArea &&
+      height == o.height &&
+      width == o.width &&
+      _margins == o._margins &&
+      _gutters == o._gutters;
 
   @override
-  int get hashCode => height.hashCode ^ width.hashCode;
+  int get hashCode =>
+      height.hashCode ^
+      width.hashCode ^
+      (_margins?.hashCode ?? 0) ^
+      (_gutters?.hashCode ?? 0);
 }

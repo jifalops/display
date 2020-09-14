@@ -1,4 +1,5 @@
 import 'package:display/display.dart';
+import 'package:display_flutter/display_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -109,7 +110,9 @@ class _DisplayExampleState extends State<DisplayExample> {
   DisplayArea widgetArea;
 
   void _update() => widgetArea = DisplayArea(
-      height: widget.constraints.maxHeight, width: widget.constraints.maxWidth);
+      gutters: 32,
+      height: widget.constraints.maxHeight,
+      width: widget.constraints.maxWidth);
 
   String _size(Size s) => '${s.width.round()}x${s.height.round()}';
 
@@ -146,7 +149,7 @@ class _DisplayExampleState extends State<DisplayExample> {
               Text('Margins: ${widgetArea.margins}'),
               Text('Gutters: ${widgetArea.gutters}'),
               Text('Column Width: ${widgetArea.columnWidth.round()}'),
-              Text('Two-Column Width: ${widgetArea.doubleColumnWidth.round()}'),
+              Text('Two-Column Width: ${widgetArea.twoColumnWidth.round()}'),
               Text('Pixel ratio: ${media.devicePixelRatio}'),
               Text('Text scale factor: ${media.textScaleFactor}'),
               Text('Orientation: ${media.orientation}'),
@@ -169,125 +172,45 @@ class _DisplayExampleState extends State<DisplayExample> {
               Text('Margins: ${widgetArea.margins}'),
               Text('Gutters: ${widgetArea.gutters}'),
               Text('Column Width: ${widgetArea.columnWidth.round()}'),
-              Text('Two-Column Width: ${widgetArea.doubleColumnWidth.round()}'),
+              Text('Two-Column Width: ${widgetArea.twoColumnWidth.round()}'),
+              Text('Four-Column Width: ${widgetArea.fourColumnWidth.round()}'),
             ],
           ),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: widgetArea.gutters),
-          child: Wrap(
-            spacing: widgetArea.margins,
-            runSpacing: widgetArea.margins,
-            children: [
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-              Container(
-                color: Colors.green,
-                height: 50,
-                width: widgetArea.doubleColumnWidth,
-              ),
-            ],
+        Container(
+          color: Colors.grey[200],
+          child: WrapResponsive(
+            children:
+                List.filled(6, ExampleContent(widgetArea.fourColumnWidth)),
           ),
         )
       ],
+    );
+  }
+}
+
+class ExampleContent extends StatelessWidget {
+  const ExampleContent(this.size);
+  final double size;
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.grey,
+      elevation: 2,
+      child: Container(
+        height: 256,
+        padding: EdgeInsets.all(8),
+        child: ListView(
+          children: List.filled(
+            8,
+            Card(
+              child: ListTile(
+                title: Text('Tile'),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

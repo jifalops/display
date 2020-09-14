@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  display: ^0.1.0
+  display: ^0.2.0
 
 dev_dependencies:
   flutter_test:

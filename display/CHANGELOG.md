@@ -1,3 +1,7 @@
+## 0.1.2
+
+- Add `multiColumnWidth()`
+
 ## 0.1.1
 
 - Add more getters for content, column, and double-column widths.

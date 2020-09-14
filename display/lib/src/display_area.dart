@@ -37,7 +37,12 @@ class DisplayArea {
   double get columnWidth => (contentWidth - totalMargins) / columns;
 
   /// The width of two material columns including the margin between them.
-  double get doubleColumnWidth => 2 * columnWidth + margins;
+  double get doubleColumnWidth => multiColumnWidth(2);
+
+  double multiColumnWidth(int cols) {
+    assert(columns >= 0 && cols <= columns);
+    return cols * columnWidth + margins * (cols - 1);
+  }
 
   MaterialDisplayType get specificType {
     if (isPortrait) {
